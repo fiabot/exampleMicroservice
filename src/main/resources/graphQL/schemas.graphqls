@@ -1,0 +1,39 @@
+type Query{
+	# get methods 
+	getAllTransactions: [Transaction]
+	getAllAccounts: [Account]
+	getAccountByNumber (accountNumber: String): Account 
+	getTransactionById (id : Int) : Transaction 
+
+	
+	# post methods 
+	createAccount (accountNumber: String!, value: Float) : Account 
+	createTransaction (fromAccount : String!, toAccount : String!, value : Float):Transaction
+	
+	# update methods 
+	updateAccountValue(accountNumber: String!, value: Float): Account 
+	processTransaction(transactionId: Int!, fromAccount: String!, toAccount: String!): Transaction 
+	
+	# delete methods 
+	deleteAccount(accountNumber: String!) : Boolean
+	deleteTransaction(transactionId: Int!) : Boolean 
+	
+	#Authentication
+	getAuthToken(username : String, password: String): String 
+		 
+}
+
+type Transaction {
+	fromAccount : String!
+	toAccount : String! 
+	value : Float 
+	id : Int! 	
+	status: String
+}
+
+type Account {
+	incomingTransactions: [Transaction] 
+	outgoingTransactions: [Transaction]
+	value : Float 
+	accountNumber : String! 
+}
